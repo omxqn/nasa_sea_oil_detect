@@ -1,0 +1,145 @@
+:root{
+  --bg:#f5f7fa; --ink:#0f172a; --muted:#64748b;
+  --brand:#0f4c81; --card:#ffffff;
+  --ok:#16a34a; --warn:#f59e0b; --alert:#dc2626;
+  --shadow:0 10px 30px rgba(2,6,23,.08); --radius:16px;
+}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Cairo",sans-serif;display:flex;height:100vh;overflow:hidden}
+aside{width:240px;background:var(--brand);color:#fff;display:flex;flex-direction:column;box-shadow:var(--shadow);height:100vh;overflow-y:auto}
+aside h2{margin:0;padding:20px;font-size:20px;font-weight:800;border-bottom:1px solid rgba(255,255,255,.12)}
+.nav{padding:8px;display:flex;flex-direction:column;gap:6px}
+.nav a{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;padding:12px;border-radius:12px;transition:.25s}
+.nav a:hover,.nav a.active{background:rgba(255,255,255,.15)}
+main{flex:1;display:flex;flex-direction:column;height:100vh;overflow-y:auto;min-width:0}
+header{background:var(--card);box-shadow:var(--shadow);margin:12px;border-radius:14px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between}
+.btn,.select{border:1px solid #e5e7eb;border-radius:10px;background:#fff;padding:8px 12px;cursor:pointer}
+section.page{padding:10px 12px;display:flex;flex-direction:column;gap:12px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:0}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px;text-align:center}
+.card h3{margin:0;color:var(--muted);font-size:13px}
+.card .value{margin-top:6px;font-size:24px;font-weight:900}
+.state-box{margin-top: 8px;padding: 10px 0;border-radius: 10px;font-weight: 800;font-size: 16px;text-align: center;background: #dcfce7;color: #166534}
+.map-wrap{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:8px}
+#map{height:70vh;border-radius:12px;position:relative}
+.legend{font-size:12px;color:var(--muted);padding:6px 2px;text-align:center}
+.controls{display:flex;gap:8px;justify-content:center}
+.table-wrap{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px;margin-top:8px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:10px;border-bottom:1px solid #e5e7eb;text-align:center}
+thead th{background:#f9fafb}
+.status-ok{color:var(--ok);font-weight:800}
+.status-warning{color:var(--warn);font-weight:800}
+.status-alert{color:var(--alert);font-weight:800}
+/* === الوضع الليلي المحسّن === */
+body.dark-mode {
+  background-color: #0a1121;
+  color: #e2e8f0;
+  transition: background-color 0.5s, color 0.5s;
+  font-family: "Cairo", sans-serif;
+}
+
+/* زر التبديل */
+.theme-toggle {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 2000;
+}
+#toggleThemeBtn {
+  background: #1e293b;
+  color: #facc15;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+#toggleThemeBtn:hover {
+  background: #334155;
+}
+
+/* البطاقات والإطارات */
+body.dark-mode .card,
+body.dark-mode .map-wrap,
+body.dark-mode .panel,
+body.dark-mode .table-wrap {
+  background: #1e293b;
+  color: #f8fafc;
+  box-shadow: 0 0 12px rgba(0,0,0,0.3);
+  border: 1px solid #334155;
+}
+#map canvas {
+  pointer-events: none;
+  mix-blend-mode: lighten;
+}
+
+/* جدول التسربات */
+body.dark-mode table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #f1f5f9;
+  background: #1e293b;
+}
+body.dark-mode table th {
+  background: #0f172a;
+  color: #facc15;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  border-bottom: 2px solid #475569;
+}
+body.dark-mode table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #334155;
+}
+body.dark-mode table tr:nth-child(even) {
+  background: #111827;
+}
+body.dark-mode table tr:hover {
+  background: #334155;
+}
+
+/* الصندوق الجانبي */
+body.dark-mode aside {
+  background: #0f172a;
+  color: #f8fafc;
+  border-right: 1px solid #334155;
+}
+
+/* الروابط الجانبية */
+body.dark-mode aside a {
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+body.dark-mode aside a:hover {
+  color: #facc15;
+}
+
+/* عناوين */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3 {
+  color: #facc15;
+}
+
+/* حالات العوامة */
+body.dark-mode .state-box.ok {
+  background: #166534;
+  color: #fff;
+}
+body.dark-mode .state-box.alert {
+  background: #b91c1c;
+  color: #fff;
+}
+
+/* الخريطة */
+body.dark-mode #map {
+  filter: invert(0.9) hue-rotate(180deg);
+  border-radius: 10px;
+}

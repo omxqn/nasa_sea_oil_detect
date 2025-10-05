@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Buoy Managment{{ buoy.device_id }}{% endblock %}
+{% block content %}
+<section class="page active">
+  <div class="map-wrap">
+    <div id="buoyMap" style="height:420px;border-radius:12px"></div>
+  </div>
+
+  <div class="table-wrap" style="margin-top:16px">
+    <table>
+      <thead><tr><th>الوقت</th><th>العكارة</th><th>pH</th><th>EC</th><th>الحالة</th></tr></thead>
+      <tbody id="readingBody"></tbody>
+    </table>
+  </div>
+</section>
+<script>
+  const buoy = {{ {
+    "id": buoy.id, "device_id": buoy.device_id, "lat": buoy.lat, "lon": buoy.lon
+  } | tojson }};
+
+
+  const buoyMap = L.map('buoyMap').setView([buoy.lat, buoy.lon], 10);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(buoyMap);
+
+    L.marker([buoy.lat, buoy.lon]).addTo(buoyMap)
+      .bindPopup("Buoy " + buoy.device_id)
+      .openPopup();
+
+
+
+  fetch(`/api/buoys/${buoy.id}`)
+    .then(r=>r.json()).then(data=>{
+      const tb = document.getElementById('readingBody');
+      (data.readings||[]).forEach(r=>{
+        const tr = document.createElement('tr');
+        const cls = r.status==='ALERT'?'status-alert':(r.status==='WARNING'?'status-warning':'status-ok');
+        tr.innerHTML = `<td>${r.ts}</td><td>${r.turbidity??'-'}</td><td>${r.ph??'-'}</td><td>${r.ec??'-'}</td><td class="${cls}">${r.status}</td>`;
+        tb.appendChild(tr);
+      });
+    });
+</script>
+{% endblock %}

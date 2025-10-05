@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Map Panel{% endblock %}
+{% block content %}
+<section id="page-map" class="page active">
+  <!-- Stats summary -->
+  <div class="stats">
+    <div class="card"><h3>Moixsure</h3><div class="value" id="avgTurb">--</div></div>
+    <div class="card"><h3>pH</h3><div class="value" id="avgPh">--</div></div>
+    <div class="card"><h3>EC</h3><div class="value" id="avgEc">--</div></div>
+    <div class="card"><h3>status</h3><div id="stateBox" class="state-box ok">OK</div></div>
+  </div>
+
+  <!-- Map Section -->
+  <div class="map-wrap">
+    <!-- Toast notification placeholder -->
+    <div id="topToast" style="position:absolute;top:10px;left:50%;transform:translateX(-50%);z-index:9999;
+         background:#111;color:#fff;padding:10px 14px;border-radius:10px;opacity:.95;display:none">
+    </div>
+
+    <!-- Map container -->
+    <div id="map"></div>
+
+    <!-- Legend + Controls -->
+    <div class="legend">
+      Click on any float to display the simulation tools.
+"Start Simulation" starts from the float's location.
+"Solution Mode" stops the leak.
+    </div>
+
+    <div class="controls" style="display:flex;gap:8px;align-items:center;margin-top:10px;">
+      <label class="select">Leakage Volume:
+        <select id="leakVolume">
+          <option value="small">5 km</option>
+          <option value="medium">10 km</option>
+          <option value="large" selected>20 km</option>
+        </select>
+      </label>
+    </div>
+  </div>
+</section>
+
+<!-- Scripts -->
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+<script src="https://unpkg.com/leaflet-canvaslayer-field/dist/leaflet.canvaslayer.field.js"></script>
+<script src="{{ url_for('static', filename='js/leaksim.js') }}"></script>
+<script src="{{ url_for('static', filename='js/buoy-management.js') }}"></script>
+{% endblock %}

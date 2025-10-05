@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sea Guardian</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/keep-classes.css') }}">
+</head>
+<body>
+  <aside>
+    <h2>Sea Guardian</h2>
+    <nav class="nav">
+      <a href="{{ url_for('web.dashboard') }}" class="{{ 'active' if request.path=='/' else '' }}"><i class="fa-solid fa-water"></i> Map</a>
+      <a href="{{ url_for('web.leaks_page') }}" class="{{ 'active' if request.path.startswith('/leaks') else '' }}"><i class="fa-solid fa-droplet"></i> Leakage</a>
+    </nav>
+  </aside>
+
+  <main>
+    <header>
+      <h1 style="margin:0;font-size:18px">{% block title %}{% endblock %}</h1>
+      <div class="theme-toggle">
+  <button id="toggleThemeBtn" class="btn">🌙 Night Mode</button>
+</div>
+
+    </header>
+    {% block content %}{% endblock %}
+  </main>
+
+  <script>
+    const toggle = document.getElementById('themeToggle');
+    if(toggle){ toggle.onclick = ()=> document.body.classList.toggle('dark'); }
+  </script>
+</body>
+</html>
